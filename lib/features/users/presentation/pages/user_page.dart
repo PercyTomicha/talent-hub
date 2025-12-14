@@ -1,0 +1,42 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/user_cubit.dart';
+import '../cubit/user_state.dart';
+
+class UserPage extends StatelessWidget {
+  const UserPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Nuestros Talentos')),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: BlocBuilder<UserCubit, UserState>(
+          builder: (context, state) {
+            if (state is UserLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is UserSuccess) {
+              return ListView.builder(
+                itemCount: state.users.length,
+                itemBuilder: (context, index) {
+                  final user = state.users[index];
+                  return ListTile(
+                    leading: CircleAvatar(child: Text(user.name[0])),
+                    title: Text(user.name),
+                  );
+                },
+              );
+            } else {
+              return Text('Error al cargar los usuarios');
+            }
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => context.read<UserCubit>().fetchUsers(),
+        child: const Icon(Icons.refresh),
+      ),
+    );
+  }
+}
