@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/user_cubit.dart';
 import '../cubit/user_state.dart';
+import '../../../../commons/widgets/tile_user.dart';
 import '../../../../commons/widgets/banner_error.dart';
 import '../../../../commons/widgets/banner_loading.dart';
 
@@ -36,11 +37,7 @@ class UserPage extends StatelessWidget {
                       itemCount: state.users.length,
                       itemBuilder: (context, index) {
                         final user = state.users[index];
-                        return ListTile(
-                          leading: CircleAvatar(child: Text(user.name[0])),
-                          title: Text(user.name),
-                          onTap: () => context.push('/prefs/$index'),
-                        );
+                        return TileUser(name: user.name);
                       },
                     );
                   } else {
