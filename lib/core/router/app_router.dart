@@ -20,7 +20,7 @@ final appRouter = GoRouter(
           path: ':id',
           builder: (context, state) {
             final id = state.pathParameters['id']!;
-            return PrefsDetailPage(id: id);
+            return PrefsDetailPage(id: int.parse(id));
           },
         ),
       ],
