@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/user_cubit.dart';
 import '../cubit/user_state.dart';
+import '../../../../commons/widgets/banner_error.dart';
+import '../../../../commons/widgets/banner_loading.dart';
 
 class UserPage extends StatelessWidget {
   const UserPage({super.key});
@@ -15,7 +17,7 @@ class UserPage extends StatelessWidget {
         child: BlocBuilder<UserCubit, UserState>(
           builder: (context, state) {
             if (state is UserLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return BannerLoading();
             } else if (state is UserSuccess) {
               return ListView.builder(
                 itemCount: state.users.length,
@@ -28,7 +30,7 @@ class UserPage extends StatelessWidget {
                 },
               );
             } else {
-              return Text('Error al cargar los usuarios');
+              return BannerError();
             }
           },
         ),
