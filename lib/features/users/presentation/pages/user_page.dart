@@ -21,7 +21,13 @@ class UserPage extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () => {context.push('/prefs')},
-                child: Text('Talentos Guardados'),
+                child: Row(
+                  children: [
+                    Text('Talentos Guardados'),
+                    SizedBox(width: 4),
+                    Icon(Icons.arrow_forward_ios, size: 12),
+                  ],
+                ),
               ),
             ],
           ),
