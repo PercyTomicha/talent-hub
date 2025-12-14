@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'di.dart';
-import 'features/users/presentation/pages/user_page.dart';
+import 'core/router/app_router.dart';
 import 'features/users/presentation/cubit/user_cubit.dart' show UserCubit;
 
 class TalentHub extends StatelessWidget {
@@ -13,9 +13,9 @@ class TalentHub extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => sl<UserCubit>()..fetchUsers()),
       ],
-      child: const MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        home: UserPage(),
+        routerConfig: appRouter,
       ),
     );
   }
